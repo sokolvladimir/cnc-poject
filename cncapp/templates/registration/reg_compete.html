@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title%}
+
+Registration complete
+
+{% endblock %}
+
+
+{% block contenet%}
+    <h2>Registration has been completed</h2>
+    <p>Now you can <a href="{% url 'cncapp:login'%}">Login</a></p>
+
+{% endblock %}

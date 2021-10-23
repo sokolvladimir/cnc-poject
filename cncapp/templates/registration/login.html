@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%}
+
+Login
+
+{% endblock %}
+
+
+{% block contenet%}
+    <h2>User login</h2>
+{% if form.errors %}
+    <p style="color: red">Bad credentials</p>
+{% endif %}
+<div class="col-sm-2">
+    <form action="." method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+
+        <input type="hidden" name="next" value="{{ next }}">
+        <input type="submit" value="login!">
+    </form>
+    </div>
+<a href="{% url 'cncapp:password_reset'%}">Forgot your password?</a>
+<a href="{% url 'cncapp:register'%}">Register</a>
+{% endblock %}

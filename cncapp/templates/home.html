@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title%}
+
+Person profile
+
+{% endblock %}
+
+
+{% block contenet%}
+<form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Edit">
+</form>
+
+<div class="pt-4 pb-4">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Material</th>
+      <th scope="col">Teeth Numbers</th>
+      <th scope="col">Cutter Diameter</th>
+      <th scope="col">Spindel Speed Min</th>
+      <th scope="col">Spindel Speed Max</th>
+      <th scope="col">Moving speed Min</th>
+      <th scope="col">Moving speed Min</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for el in cncprog %}
+    <tr>
+      <th scope="row">{{ el.material}}</th>
+      <td>{{ el.teeth_numbers}}</td>
+      <td>{{ el.cutter_diameter}}</td>
+      <td>{{ el.spindel_speed_min }}</td>
+      <td>{{ el.spindel_speed_max}}</td>
+      <td>{{ el.moving_speed_min}}</td>
+      <td>{{ el.moving_speed_max}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

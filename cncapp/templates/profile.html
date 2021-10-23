@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title%}
+
+Person profile
+
+{% endblock %}
+
+
+{% block contenet%}
+    <p>Name: {{request.user.first_name}} {{request.user.last_name}}</p>
+    <p>Birthday: {{request.user.profile.birthday}}</p>
+    <p><img src="{{request.user.profile.photo.url}}" alt="НУ И РОЖА"></p>
+    <p><a href="{% url 'cncapp:edit_profile'%}">Edit profile</a></p>
+{% endblock %}

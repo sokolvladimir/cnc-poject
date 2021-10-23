@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title%}
+
+Person profile
+
+{% endblock %}
+
+
+{% block contenet%}
+<form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Edit">
+</form>
+
+<div class="pt-4 pb-4">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Material</th>
+      <th scope="col">Teeth Numbers</th>
+      <th scope="col">Cutter Diameter</th>
+      <th scope="col">Spindel Speed</th>
+      <th scope="col">Moving speed</th>
+    </tr>
+  </thead>
+  <tbody>
+<!--  {% if my_cut%}-->
+    {% for el in my_cut %}
+      <tr>
+        <th scope="row">{{ el.material}}</th>
+        <td>{{ el.teeth_numbers}}</td>
+        <td>{{ el.cutter_diameter}}</td>
+        <td>{{ el.spindel_speed }}</td>
+        <td>{{ el.moving_speed}}</td>
+      </tr>
+    {% endfor %}
+<!--  {% else %}-->
+<!--  <h2>Enter data</h2>-->
+<!--  {% endif %}-->
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

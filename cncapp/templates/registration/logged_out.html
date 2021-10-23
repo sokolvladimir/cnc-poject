@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title%}
+
+Logout
+
+{% endblock %}
+
+
+{% block contenet%}
+    <h2>Logout</h2>
+    You have been logged out
+<a href="{% url 'cncapp:login'%}">Login</a>
+
+{% endblock %}
