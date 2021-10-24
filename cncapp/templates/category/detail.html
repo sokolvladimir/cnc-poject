@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title%}
+
+Category
+
+{% endblock %}
+
+
+{% block contenet%}
+<h3>{{ detail_category.name }}</h3> <br>
+{% for material in tbd  %}
+    {% if material.category_id == detail_category.id %}
+    <h4><a href="{{ material.get_absolute_url }}">{{ material.title }}</a></h4>
+    <p>
+        {{ material.note|linebreaks|truncatewords:40 }}
+    </p>
+
+    {% endif %}
+{% endfor %}
+{% endblock %}

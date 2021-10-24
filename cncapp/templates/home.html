@@ -2,16 +2,17 @@
 
 {% block title%}
 
-Person profile
+Home
 
 {% endblock %}
 
 
 {% block contenet%}
+<h3>Create your first milling mode</h3> <br>
 <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <input type="submit" value="Edit">
+        <input type="submit" value="Calculate">
 </form>
 
 <div class="pt-4 pb-4">

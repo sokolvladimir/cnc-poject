@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title%}
+
+Category
+
+{% endblock %}
+
+
+{% block contenet%}
+<h3>{{ information.title }}</h3>
+<p>
+{% if information.photo %}
+    <p><img src="{{information.photo.url}}" alt="фреза" width="200" ></p>
+{% else %}
+    <p></p>
+{% endif %}
+
+    {{ information.note|linebreaks }}
+</p>
+<p> Created at {{ information.publish }} </p>
+
+{% with information.comment.count as total_comment %}
+    <p>{{ total_comment }} comment{{ total_comment|pluralize }}</p>
+{% endwith %}
+{% for comment in information.comment.all %}
+    <strong><p>Comment #{{ forloop.counter }} by {{ comment.name }}</p></strong>
+    <p>{{ comment.body }}</p>
+{% empty %}
+    No comments.
+{% endfor %}
+<form action="." method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Add comment!">
+</form>
+
+
+{% endblock %}

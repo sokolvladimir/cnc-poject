@@ -56,7 +56,7 @@ def create_cnc(request):
             return render(request, "home.html", {'form': cnc_form, 'cncprog': cncprog})
     else:
         cnc_form = forms.CncForm()
-    return render(request,  "home.html", {'form': cnc_form, 'cncprog': cncprog})
+    return render(request, "home.html", {'form': cnc_form})
 
 
 def view_profile(request):
@@ -122,4 +122,38 @@ def my_cutter(request):
             return render(request, "my_cutters.html", {'form': my_cutter_form, 'my_cut': my_cut})
     else:
         my_cutter_form = forms.MyCatterForm()
-    return render(request,  "my_cutters.html", {'form': my_cutter_form, 'my_cut': my_cut})
+    return render(request, "my_cutters.html", {'form': my_cutter_form, 'my_cut': my_cut})
+
+
+def information_details(request, y, m, d, slug):
+    information = get_object_or_404(models.Information,
+                                    slug=slug,
+                                    publish__year=y,
+                                    publish__month=m,
+                                    publish__day=d)
+
+    if request.method == 'POST':
+        comment_form = forms.CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.material = information
+            new_comment.save()
+            return redirect(information)
+    else:
+        comment_form = forms.CommentForm()
+
+    return render(request, 'informations/detail.html', {'information': information, 'form': comment_form })
+
+
+def show_category(request):
+    category = models.InformationCategory.objects.all()
+    return render(request, 'category/category.html', {'category': category})
+
+
+def category_details(request, slug):
+    detail_category = get_object_or_404(models.InformationCategory,
+                                        slug=slug)
+    tbd = models.Information.objects.all()
+    return render(request,
+                  'category/detail.html',
+                  {'detail_category': detail_category, 'tbd': tbd})

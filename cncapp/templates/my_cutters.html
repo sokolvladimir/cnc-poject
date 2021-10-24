@@ -2,16 +2,17 @@
 
 {% block title%}
 
-Person profile
+My cutters
 
 {% endblock %}
 
 
 {% block contenet%}
+<h3>My cutters</h3>
 <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <input type="submit" value="Edit">
+        <input type="submit" value="Calculate">
 </form>
 
 <div class="pt-4 pb-4">
@@ -26,7 +27,7 @@ Person profile
     </tr>
   </thead>
   <tbody>
-<!--  {% if my_cut%}-->
+  {% if my_cut%}
     {% for el in my_cut %}
       <tr>
         <th scope="row">{{ el.material}}</th>
@@ -36,9 +37,9 @@ Person profile
         <td>{{ el.moving_speed}}</td>
       </tr>
     {% endfor %}
-<!--  {% else %}-->
-<!--  <h2>Enter data</h2>-->
-<!--  {% endif %}-->
+  {% else %}
+  <h4>Enter cutter</h4> <br>
+  {% endif %}
   </tbody>
 </table>
 </div>

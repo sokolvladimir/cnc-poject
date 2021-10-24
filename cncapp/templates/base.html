@@ -39,7 +39,7 @@
                 <nav class="nav flex-column">
                     <a class="nav-link" href="{% url 'cncapp:create_cnc'%}">Home</a>
                     <a class="nav-link" href="{% url 'cncapp:my_cutter'%}">My cutters</a>
-                    <a class="nav-link" href="#">Information</a>
+                    <a class="nav-link" href="{% url 'cncapp:show_category'%}">Information</a>
                     <a class="nav-link" href="{% url 'cncapp:how_it_made'%}">How it Made</a>
                 </nav>
             {% endblock %}

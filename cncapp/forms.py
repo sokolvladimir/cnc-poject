@@ -15,17 +15,6 @@ class CncForm(forms.ModelForm):
         }
 
 
-class EmailMaterialForm(forms.Form):
-    my_name = forms.CharField(max_length=20)
-    to_email = forms.EmailField()
-    comment = forms.CharField(widget=forms.Textarea)
-
-
-# class LoginForm(forms.Form):
-#     login = forms.CharField(max_length=25)
-#     password = forms.CharField(max_length=255, widget=forms.PasswordInput)
-
-
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label='once again', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -65,7 +54,8 @@ class ProfileEditForm(forms.ModelForm):
         fields = ('birthday', 'photo')
 
         widgets = {
-            'birthday': forms.DateTimeInput(attrs={'class': 'form-control'}),
+            'birthday': forms.DateTimeInput(attrs={'class': 'form-control',
+                                                   'placeholder': 'year-month-day/2000-05-09'}),
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
@@ -82,4 +72,10 @@ class MyCatterForm(forms.ModelForm):
             'spindel_speed': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '6000'}),
             'moving_speed': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '800'}, ),
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = ('name', 'body')
 

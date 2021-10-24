@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
+from django.urls import reverse
 
 
 class CncProg(models.Model):
@@ -72,3 +74,43 @@ class MyCutter(models.Model):
     spindel_speed = models.IntegerField()
     moving_speed = models.IntegerField()
 
+
+class InformationCategory(models.Model):
+    name = models.CharField(max_length=50, db_index=True)
+    slug = models.SlugField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('cncapp:category_details',
+                       args=[self.slug, ])
+
+
+class Information(models.Model):
+
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+    note = models.TextField()
+    publish = models.DateTimeField(default=timezone.now)
+    category = models.ForeignKey('InformationCategory', on_delete=models.PROTECT, null=True)
+    photo = models.ImageField(upload_to='cutters/%Y/%m/%d/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('cncapp:information_details',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
+
+
+class Comment(models.Model):
+    material = models.ForeignKey(Information,
+                                 on_delete=models.CASCADE,
+                                 related_name='comment')
+    name = models.CharField(max_length=100)
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
